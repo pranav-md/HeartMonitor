@@ -22,7 +22,7 @@
             android:text="Chacko K T"
             android:textColor="@android:color/white"
             android:fontFamily="sans-serif-black"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
 
         <TextView
@@ -46,7 +46,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/white"
-            android:text="Gender: Male"
+            android:text="Gender: M"
             android:fontFamily="sans-serif-black"
             android:layout_margin="5dp"
             android:padding="5dp"
@@ -92,14 +92,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_layout"
+        android:background="@drawable/rounded_rectangle_blue"
         android:orientation="vertical"
-        android:layout_margin="10dp">
-
+        android:layout_margin="10dp"
+        android:elevation="4dp"
+        android:translationZ="5dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
         <TextView
             android:id="@+id/textView355"
             android:layout_width="wrap_content"
@@ -107,7 +108,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Devices found"
+            android:text="Device Scan Result"
             android:fontFamily="sans-serif-black"
             android:textColor="@android:color/white"
             android:textSize="20sp"
@@ -122,6 +123,12 @@
             android:layout_marginLeft="10dp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/textView35"
@@ -144,6 +151,7 @@
             android:fontFamily="sans-serif-black"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
+        </LinearLayout>
 
 
     </LinearLayout>
