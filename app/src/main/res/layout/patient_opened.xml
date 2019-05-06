@@ -61,7 +61,7 @@
         android:layout_margin="10dp">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/bt_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -124,34 +124,20 @@
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/address_parent"
             android:orientation="vertical"
             android:layout_marginTop="15dp">
 
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="SimpleBLEPeripheral                     :04:99:4C:62:1E:9C:"
-            android:fontFamily="sans-serif-black"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/dsfsfs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="SimpleBLEPeripheral                     :33:64:3V:34:2S:4C:"
-            android:fontFamily="sans-serif-black"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
         </LinearLayout>
+
+        </ScrollView>
 
 
     </LinearLayout>
