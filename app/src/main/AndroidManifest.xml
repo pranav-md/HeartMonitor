@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ShowAllPatients"></activity>
-        <activity android:name=".ShowPatient">
+        <activity android:name=".EnterPatientDetails"></activity>
+        <activity android:name=".ShowPatient"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

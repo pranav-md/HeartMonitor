@@ -2,6 +2,7 @@ package pmd.comprssr.com.heartmonitor;
 
 import android.app.Activity;
 
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -15,6 +16,7 @@ import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -25,6 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.polidea.rxandroidble2.RxBleClient;
 import com.polidea.rxandroidble2.scan.ScanSettings;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -48,7 +55,12 @@ public class ShowPatient extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_opened);
+        Intent intent=getIntent();
+        String name=intent.getStringExtra("NAME");
+
+
         address_list = new ArrayList<String>();
+        setData(name);
         final BluetoothManager bluetoothManager =
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         BA = bluetoothManager.getAdapter();
@@ -159,7 +171,36 @@ public class ShowPatient extends Activity {
 
 
     }
+    void setData(String name)
+    {
+        ProgressDialog progressBar=new ProgressDialog(this);
+        progressBar.setMessage("Loading Patient data");
+        progressBar.show();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference dataRef = database.getReference();
+        dataRef.child("PatientData").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.dismiss();
+                TextView pat_name=(TextView)findViewById(R.id.patient_name);
+                TextView pat_age=(TextView)findViewById(R.id.age);
+                TextView pat_gender=(TextView)findViewById(R.id.gender);
+                TextView pat_address=(TextView)findViewById(R.id.address);
+
+                pat_name.setText(dataSnapshot.child("Name").getValue().toString());
+                pat_gender.setText("Gender :"+dataSnapshot.child("Gender").getValue().toString());
+                pat_age.setText("Age :"+dataSnapshot.child("Age").getValue().toString());
+                pat_address.setText("Address :"+dataSnapshot.child("Address").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 }
