@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "437933728622",
+    "firebase_url": "https://heartmonitor-c4cb0.firebaseio.com",
+    "project_id": "heartmonitor-c4cb0",
+    "storage_bucket": "heartmonitor-c4cb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437933728622:android:8979ed92023ab117",
+        "android_client_info": {
+          "package_name": "pmd.comprssr.com.heartmonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437933728622-kf1d5ar7h59r96i79t1v683fa42ak270.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSNljMlZzjgzd0W-Jf9MUJlFdk7yrzOFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437933728622-kf1d5ar7h59r96i79t1v683fa42ak270.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

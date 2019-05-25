@@ -32,6 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.polidea.rxandroidble2.RxBleClient;
 import com.polidea.rxandroidble2.scan.ScanSettings;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -39,6 +42,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import io.reactivex.disposables.Disposable;
@@ -50,6 +54,7 @@ public class ShowPatient extends Activity {
     BluetoothAdapter BA;
     RxBleClient rxBleClient;
     private BluetoothLeScanner mLEScanner;
+    GraphView gview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,21 +62,51 @@ public class ShowPatient extends Activity {
         setContentView(R.layout.patient_opened);
         Intent intent=getIntent();
         String name=intent.getStringExtra("NAME");
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 5),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6),
+                new DataPoint(5, 5),
+                new DataPoint(6, 5),
+                new DataPoint(7, 3),
+                new DataPoint(8, 2),
+                new DataPoint(9, 6),
+                new DataPoint(10, 5),
+                new DataPoint(11, 5),
+                new DataPoint(12, 3),
+                new DataPoint(13, 2),
+                new DataPoint(14, 6)
+
+        });
+
+       series.appendData(new DataPoint(15,2),false,20);
+        graph.addSeries(series);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScalable(true);
+        Random rand = new Random();
+        for(int i=16;i<50;i++)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            series.appendData(new DataPoint(i, rand.nextInt(10)),false,12);
+            graph.addSeries(series);
+        }
 
 
         address_list = new ArrayList<String>();
-        setData(name);
+     //   setData(name);
         final BluetoothManager bluetoothManager =
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         BA = bluetoothManager.getAdapter();
         mLEScanner = BA.getBluetoothLeScanner();
-        Button scan=(Button)findViewById(R.id.bt_scan);
-        scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getBluetoothData();
-            }
-        });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
@@ -88,7 +123,7 @@ public class ShowPatient extends Activity {
                 addDevice(device.getName(),device.getAddress());
             }
         }*/
-        BluetoothLeScanner bluetoothScanner = BA.getBluetoothLeScanner();
+   /*     BluetoothLeScanner bluetoothScanner = BA.getBluetoothLeScanner();
 
         ScanCallback mScanCallback = new ScanCallback() {
             @Override
@@ -118,7 +153,7 @@ public class ShowPatient extends Activity {
         mLEScanner.startScan(mScanCallback);
 
         BA.startLeScan(leScnCallback);
-
+*/
     }
 
     @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
@@ -130,9 +165,9 @@ public class ShowPatient extends Activity {
 
 
 
-    void addDevice(String device_name, String device_address) {
+ /*   void addDevice(String device_name, String device_address) {
         address_list.add(device_address);
-        LinearLayout parent_address = findViewById(R.id.address_parent);
+  //      LinearLayout parent_address = findViewById(R.id.address_parent);
         //Log.d("name ", device_name);
        // Log.d("address ", device_address);
 
@@ -171,6 +206,8 @@ public class ShowPatient extends Activity {
 
 
     }
+
+    /*
     void setData(String name)
     {
         ProgressDialog progressBar=new ProgressDialog(this);
@@ -201,6 +238,6 @@ public class ShowPatient extends Activity {
         });
 
     }
-
+*/
 
 }
